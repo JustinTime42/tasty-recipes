@@ -1,0 +1,22 @@
+@media screen and (max-width: 1200px) {
+    .recipeDetails {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    .recipeDetails {
+        width: 1200px;
+        margin: auto;
+    }
+}
+
+.accordion-header {
+    display: inline-block;
+    margin-right: auto;
+    margin-left: auto;    
+}
+
+ul {
+    list-style-type: none;
+}

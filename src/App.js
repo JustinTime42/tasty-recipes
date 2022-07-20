@@ -1,25 +1,39 @@
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react'
+import { useDispatch } from 'react-redux'
+import { Routes, Route } from "react-router-dom"
+import CardList from './CardList'
+import Recipe from './Recipe'
 import './App.css';
+import { setSpecials } from './features/specials/specialsSlice'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+  const [recipes, setRecipes] = useState([])
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    getData('/recipes')
+    .then(data => setRecipes(data))
+    getData('/specials')
+    .then(data => {dispatch(setSpecials(data))} )
+  },[])
+
+  const getData = (endpoint) => {
+    return (
+      fetch(`${process.env.REACT_APP_API}${endpoint}`)
+      .then(res => res.json())
+      .then(data => {return data})
+      .catch(err => alert(err))
+    )
+  }
+
+    return (
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<CardList recipes={recipes}/>} />
+          <Route path="/recipe" element={<Recipe />} />
+        </Routes>
+      </div>
+  )
 }
 
-export default App;
+export default App

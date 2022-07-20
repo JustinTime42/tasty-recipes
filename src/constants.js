@@ -1,0 +1,1 @@
+export const SET_SPECIALS = 'SET_SPECIALS'
