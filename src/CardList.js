@@ -9,7 +9,6 @@ const CardList = (props) => {
 
     return (
         <div className='cardList'>
-
             {
             recipes.map((recipe, i) => {
                 return <RecipeCard key={i} recipe={recipe} />                

@@ -159,11 +159,11 @@ const Recipe = () => {
                         {
                             recipe.directions.map((item, i) => {
                                 return (
-                                        <ListGroup.Item as='li'  key={i}>
-                                            <input disabled={!editing} style={inputStyle(item.instructions)} type='text' name='instructions' value={item.instructions} onChange={(e) => onChange(e, 'directions', item)} />
-                                            <input disabled={true} style={inputStyle(item.optional)} type='text' name='optional' value={item.optional} onChange={(e) => onChange(e, 'directions', item)} />
-                                            <input visibility={editing ? "visible" : 'hidden'} type="checkbox" name='optional' checked={item.optional} onChange={(e) => onChange(e, 'directions', item)}></input>
-                                        </ListGroup.Item>
+                                    <ListGroup.Item as='li'  key={i}>
+                                        <input disabled={!editing} style={inputStyle(item.instructions)} type='text' name='instructions' value={item.instructions} onChange={(e) => onChange(e, 'directions', item)} />
+                                        <input disabled={true} style={inputStyle(item.optional)} type={(item.optional || editing)? "text" : 'hidden'} name='optional' value={item.optional ? '(optional)' : ''} onChange={(e) => onChange(e, 'directions', item)} />
+                                        <input type={editing ? "checkbox" : 'hidden'} name='optional' checked={item.optional} onChange={(e) => onChange(e, 'directions', item)}></input>
+                                    </ListGroup.Item>
                                 )
                             })
                         }

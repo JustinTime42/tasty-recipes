@@ -10,9 +10,7 @@
         margin-right: auto;
         margin-left: auto;
     }
-    .accordion-item {
-        justify-content: right;
-    }
+
     div .card-body  {
         align-items: right;
         justify-content: center;
@@ -23,8 +21,7 @@
 
     .accordion {
         justify-content: right;
-        position: fixed;
-        z-index: 0;
+        margin-top: 1em;
     }
     .accordion-item {
         justify-content: right;
@@ -75,5 +72,4 @@ ul {
     position: fixed;
     right: 1em;
     bottom: 1em;
-    z-index: 9;
 }

@@ -47,9 +47,9 @@ const App = () => {
   }
 
   const handleNew = () => {
-    setIsMenuOpen({menuOpen: false})
-    dispatch(setEditing(true))
+    setIsMenuOpen({menuOpen: false})    
     dispatch(clearActiveRecipe())
+    dispatch(setEditing(true))
   }
 
     return (
