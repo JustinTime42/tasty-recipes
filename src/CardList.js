@@ -1,17 +1,17 @@
-import React from "react";
+import React, {useEffect} from "react";
+import {useSelector} from 'react-redux'
+
 import RecipeCard from './RecipeCard'
+import './CardList.css'
 
 const CardList = (props) => {
+    const recipes = useSelector(state => state.recipes.recipes)
 
-    const listStyle = {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around'
-    }
     return (
-        <div style={listStyle}>
+        <div className='cardList'>
+
             {
-            props.recipes.map((recipe, i) => {
+            recipes.map((recipe, i) => {
                 return <RecipeCard key={i} recipe={recipe} />                
             })
             }

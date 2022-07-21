@@ -1,18 +1,25 @@
 import React, {useState, useEffect} from 'react'
 import { useDispatch } from 'react-redux'
-import { Routes, Route } from "react-router-dom"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import CardList from './CardList'
 import Recipe from './Recipe'
-import './App.css';
+import {slide as Menu} from 'react-burger-menu'
+import './App.css'
+import './menu.css'
 import { setSpecials } from './features/specials/specialsSlice'
+import { setRecipes } from './features/specials/recipesSlice'
+import { clearActiveRecipe } from "./features/specials/activeRecipeSlice"
+import { setEditing } from './features/specials/setEditingSlice'
+
+import ScrollTop from './ScrollTop'
 
 const App = () => {
-  const [recipes, setRecipes] = useState([])
+  const [isMenuOpen, setIsMenuOpen] = useState({menuOpen: false})
   const dispatch = useDispatch()
 
   useEffect(() => {
     getData('/recipes')
-    .then(data => setRecipes(data))
+    .then(data => {dispatch(setRecipes(data))})
     getData('/specials')
     .then(data => {dispatch(setSpecials(data))} )
   },[])
@@ -26,12 +33,44 @@ const App = () => {
     )
   }
 
+  const handleMenuChange = (state) => {
+    setIsMenuOpen({menuOpen: state.isOpen})
+  }
+
+  const handleClose = () => {
+    setIsMenuOpen({menuOpen: false})
+  }
+
+  const handleEdit = () => {
+    setIsMenuOpen({menuOpen: false})
+    dispatch(setEditing(true))
+  }
+
+  const handleNew = () => {
+    setIsMenuOpen({menuOpen: false})
+    dispatch(setEditing(true))
+    dispatch(clearActiveRecipe())
+  }
+
     return (
       <div className="App">
-        <Routes>
-          <Route path="/" element={<CardList recipes={recipes}/>} />
-          <Route path="/recipe" element={<Recipe />} />
-        </Routes>
+        <Menu 
+          isOpen={isMenuOpen.menuOpen}
+          onStateChange={(state) => setIsMenuOpen(state)}
+        >
+          <a id="home" className="menu-item" href="/" onClick={() => setIsMenuOpen({menuOpen: false})}>Home</a>
+          <a id="new" className="menu-item" href="/recipe/" onClick={() => handleNew()}>Add Recipe</a>
+          <a id="edit" className="menu-item" onClick={() => handleEdit()}>Edit Recipe</a>
+        </Menu>
+        <Router>
+          <ScrollTop>
+            <Routes>
+              <Route path="/" element={<CardList/>} />
+              <Route path="/recipe/" element={<Recipe />} />
+              <Route path="/recipe/:name" element={<Recipe />} />
+            </Routes>
+          </ScrollTop>
+        </Router>
       </div>
   )
 }

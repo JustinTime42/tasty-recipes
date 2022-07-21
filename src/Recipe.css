@@ -1,13 +1,57 @@
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 700px) {
     .recipeDetails {
         width: 100%;
     }
 }
 
+@media screen and (min-width: 701px) and (max-width: 1200px){
+    .recipeDetails {
+        width: 700px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+    .accordion-item {
+        justify-content: right;
+    }
+    div .card-body  {
+        align-items: right;
+        justify-content: center;
+    }
+}
+
 @media screen and (min-width: 1201px) {
+
+    .accordion {
+        justify-content: right;
+        position: fixed;
+        z-index: 0;
+    }
+    .accordion-item {
+        justify-content: right;
+        width: 910px;
+        border-style: none;
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto;
+    }
     .recipeDetails {
         width: 1200px;
         margin: auto;
+    }
+    .topSection {
+        display: flex;
+        justify-content: center;
+        align-items: top;
+    }
+
+    .timeCard {
+        width: 300px;
+        margin-left: 10px;
+        align-self: flex-start;
+    }
+
+    .topSection img{
+        width: 700px;
     }
 }
 
@@ -19,4 +63,17 @@
 
 ul {
     list-style-type: none;
+}
+
+.recipeItem {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+.saveButton {
+    position: fixed;
+    right: 1em;
+    bottom: 1em;
+    z-index: 9;
 }
