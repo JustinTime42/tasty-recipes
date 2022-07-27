@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import CardList from './CardList'
 import Recipe from './Recipe'
 import {slide as Menu} from 'react-burger-menu'
-import './App.css'
-import './menu.css'
+import './styles/App.css'
+import './styles/menu.css'
 import { setSpecials } from './features/specials/specialsSlice'
 import { setRecipes } from './features/specials/recipesSlice'
 import { clearActiveRecipe } from "./features/specials/activeRecipeSlice"
@@ -33,14 +33,6 @@ const App = () => {
     )
   }
 
-  const handleMenuChange = (state) => {
-    setIsMenuOpen({menuOpen: state.isOpen})
-  }
-
-  const handleClose = () => {
-    setIsMenuOpen({menuOpen: false})
-  }
-
   const handleEdit = () => {
     setIsMenuOpen({menuOpen: false})
     dispatch(setEditing(true))
@@ -52,26 +44,26 @@ const App = () => {
     dispatch(setEditing(true))
   }
 
-    return (
-      <div className="App">
-        <Menu 
-          isOpen={isMenuOpen.menuOpen}
-          onStateChange={(state) => setIsMenuOpen(state)}
-        >
-          <a id="home" className="menu-item" href="/" onClick={() => setIsMenuOpen({menuOpen: false})}>Home</a>
-          <a id="new" className="menu-item" href="/recipe/" onClick={() => handleNew()}>Add Recipe</a>
-          <a id="edit" className="menu-item" onClick={() => handleEdit()}>Edit Recipe</a>
-        </Menu>
-        <Router>
-          <ScrollTop>
-            <Routes>
-              <Route path="/" element={<CardList/>} />
-              <Route path="/recipe/" element={<Recipe />} />
-              <Route path="/recipe/:name" element={<Recipe />} />
-            </Routes>
-          </ScrollTop>
-        </Router>
-      </div>
+  return (
+    <div className="App">
+      <Menu 
+        isOpen={isMenuOpen.menuOpen}
+        onStateChange={(state) => setIsMenuOpen(state)}
+      >
+        <a id="home" className="menu-item" href="/" onClick={() => setIsMenuOpen({menuOpen: false})}>Home</a>
+        <a id="new" className="menu-item" href="/recipe/" onClick={() => handleNew()}>Add Recipe</a>
+        <a id="edit" className="menu-item" onClick={() => handleEdit()}>Edit Recipe</a>
+      </Menu>
+      <Router>
+        <ScrollTop>
+          <Routes>
+            <Route path="/" element={<CardList/>} />
+            <Route path="/recipe/" element={<Recipe />} />
+            <Route path="/recipe/:name" element={<Recipe />} />
+          </Routes>
+        </ScrollTop>
+      </Router>
+    </div>
   )
 }
 

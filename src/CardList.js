@@ -1,10 +1,10 @@
-import React, {useEffect} from "react";
-import {useSelector} from 'react-redux'
+import React from "react"
+import { useSelector } from 'react-redux'
 
 import RecipeCard from './RecipeCard'
-import './CardList.css'
+import './styles/CardList.css'
 
-const CardList = (props) => {
+const CardList = () => {
     const recipes = useSelector(state => state.recipes.recipes)
 
     return (
@@ -15,7 +15,6 @@ const CardList = (props) => {
             })
             }
         </div>
-
     )
 }
 

@@ -2,8 +2,8 @@ import React from "react"
 import { useDispatch } from 'react-redux'
 import { setActiveRecipe } from "./features/specials/activeRecipeSlice"
 import Card from 'react-bootstrap/Card'
-import {Link} from 'react-router-dom'
-import './RecipeCard.css'
+import { Link } from 'react-router-dom'
+import './styles/RecipeCard.css'
 
 const RecipeCard = ({recipe}) => {
 

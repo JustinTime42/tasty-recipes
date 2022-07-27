@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react"
+import React, { useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from "react-router-dom"
 import { setActiveRecipe } from "./features/specials/activeRecipeSlice"
@@ -6,13 +6,12 @@ import Accordion from "react-bootstrap/Accordion"
 import ListGroup from 'react-bootstrap/ListGroup'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import './Recipe.css'
+import './styles/Recipe.css'
 import { setEditing } from "./features/specials/setEditingSlice"
 
 const Recipe = () => {
     const specials = useSelector(state => state.specials.specials)
     const recipe = useSelector(state => state.activeRecipe.recipe)
-    const recipes = useSelector(state => state.recipes.recipes)
     const editing = useSelector(state => state.setEditing.editing)
     const dispatch = useDispatch()
     const recipeParams = useParams()
@@ -26,7 +25,7 @@ const Recipe = () => {
                 console.log(data)
                 dispatch(setActiveRecipe(data))
             } )
-            .catch(err => alert(MediaError))
+            .catch(err => alert(err))
         }
     },[recipe])
 
@@ -34,16 +33,15 @@ const Recipe = () => {
         let field = text
         let width = 0
        
-        if (typeof(text) === 'number') {       
-            field = text.toString()
-            width = ((field.length + 2) * 9) + 'px'
-        }  
         if (!field) {
             width = 0
         } else {            
             width = ((field.length + 1) * 8) + 'px'
         }
-
+        if (typeof(text) === 'number') {       
+            field = text.toString()
+            width = ((field.length + 2) * 9) + 'px'
+        }  
         width = ((width < 30) && (editing)) ? 30 : width
         return (
             {                
@@ -53,7 +51,6 @@ const Recipe = () => {
                 backgroundColor: 'white'
             }
         )
-
     }
 
     const findSpecials = (ingredient) => {
@@ -179,8 +176,7 @@ const Recipe = () => {
                 <p>Posted on {recipe.postDate}</p>
                 <p>Last Updated {recipe.editDate}</p>
             </div>            
-        </div>
-    
+        </div>    
     )
 }
 
