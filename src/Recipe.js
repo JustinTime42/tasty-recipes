@@ -33,20 +33,24 @@ const Recipe = () => {
     const inputStyle = (text) => {
         let field = text
         let width = 0
+       
         if (typeof(text) === 'number') {       
             field = text.toString()
-        }         
+            width = ((field.length + 2) * 9) + 'px'
+        }  
         if (!field) {
             width = 0
         } else {            
             width = ((field.length + 1) * 8) + 'px'
         }
-        width = ((width < 25) && (editing)) ? 25 : width
+
+        width = ((width < 30) && (editing)) ? 30 : width
         return (
             {                
                 width: width,
                 display: 'inline',
                 border: editing ? '1px solid black' : 'none',
+                backgroundColor: 'white'
             }
         )
 
