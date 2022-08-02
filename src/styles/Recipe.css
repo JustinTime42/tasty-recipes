@@ -65,7 +65,7 @@ ul {
 .recipeItem {
     display: flex;
     justify-content: center;
-    align-items: baseline;
+    align-items: baseline;    
 }
 
 .saveButton {

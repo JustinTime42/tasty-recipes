@@ -32,23 +32,23 @@ const Recipe = () => {
     const inputStyle = (text) => {
         let field = text
         let width = 0
-       
-        if (!field) {
+
+        if (text === '') {
+            console.log("nothing", text)
             width = 0
-        } else {            
-            width = ((field.length + 1) * 8) + 'px'
-        }
-        if (typeof(text) === 'number') {       
+        } else if (typeof(text) === 'number') {   
             field = text.toString()
-            width = ((field.length + 2) * 9) + 'px'
-        }  
-        width = ((width < 30) && (editing)) ? 30 : width
+            width = ((field.length + 3) * 8) 
+        } else {
+            width = ((field.length + 1) * 8)
+        }
+        width = ((width < 40) && (editing)) ? 40 : width
         return (
-            {                
-                width: width,
+            {
+                width: `${width}px`,
                 display: 'inline',
                 border: editing ? '1px solid black' : 'none',
-                backgroundColor: 'white'
+                backgroundColor: 'white',
             }
         )
     }
@@ -163,7 +163,8 @@ const Recipe = () => {
                                     <ListGroup.Item as='li'  key={i}>
                                         <input disabled={!editing} style={inputStyle(item.instructions)} type='text' name='instructions' value={item.instructions} onChange={(e) => onChange(e, 'directions', item)} />
                                         <input disabled={true} style={inputStyle(item.optional)} type={(item.optional || editing)? "text" : 'hidden'} name='optional' value={item.optional ? '(optional)' : ''} onChange={(e) => onChange(e, 'directions', item)} />
-                                        <input type={editing ? "checkbox" : 'hidden'} name='optional' checked={item.optional} onChange={(e) => onChange(e, 'directions', item)}></input>
+                                        <input type={editing ? "checkbox" : 'hidden'} id={item.instructions} name='optional' checked={item.optional} onChange={(e) => onChange(e, 'directions', item)}></input>
+                                        <label style={{visibility: editing ? 'visible' : 'hidden'}}  for={item.instructions}>Optional?</label>
                                     </ListGroup.Item>
                                 )
                             })
